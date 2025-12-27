@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran/Auth/cubit/login_cubit.dart';
+import 'package:quran/splash/splash.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+    providers: 
+    [
+      BlocProvider(
+        create: (context) => LoginCubit(),
+      ),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -9,21 +21,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: FirstApp());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: FirstApp());
   }
 }
 
 class FirstApp extends StatelessWidget {
-  List qr = ["الفاتحة", "البقرة", "أل عمران"];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("QURAN")),
-      body: ListView.builder(
-        itemCount: qr.length,
-        itemBuilder: (context, index) => Text(qr[index]),
-      ),
-    ); // Shows a gray placeholder box
+    return Spalsh();
   }
 }
